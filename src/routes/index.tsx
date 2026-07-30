@@ -1,6 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, CircleDot, Trophy, Users } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  CircleDot,
+  Radio,
+  Trophy,
+  UserPlus,
+  Users,
+} from "lucide-react";
 
 import { LiveDot, StatCounter } from "@/components/stat-counter";
 import { Button } from "@/components/ui/button";
@@ -62,20 +70,31 @@ function Dashboard() {
             every career stat, economy rate and standing from that one record.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild variant="secondary">
+            <Button
+              asChild
+              className="rounded-full bg-live px-6 text-live-foreground shadow-lift hover:bg-live/90"
+            >
               <Link to="/matches">
                 Go to matches <ArrowRight className="size-4" />
               </Link>
             </Button>
             <Button
               asChild
-              variant="ghost"
-              className="text-sidebar-foreground hover:bg-sidebar-accent"
+              variant="outline"
+              className="rounded-full border-sidebar-foreground/30 bg-transparent px-6 text-sidebar-foreground hover:bg-sidebar-accent"
             >
               <Link to="/players">Register a player</Link>
             </Button>
           </div>
         </motion.div>
+      </section>
+
+      <section className="grid grid-cols-3 gap-4 sm:grid-cols-5">
+        <QuickLink to="/live" icon={Radio} label="Live scoring" />
+        <QuickLink to="/teams" icon={Users} label="Teams" />
+        <QuickLink to="/tournaments" icon={Trophy} label="Tournaments" />
+        <QuickLink to="/rankings" icon={BarChart3} label="Rankings" />
+        <QuickLink to="/players" icon={UserPlus} label="Players" />
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -138,6 +157,28 @@ function Dashboard() {
         )}
       </section>
     </div>
+  );
+}
+
+function QuickLink({
+  to,
+  icon: Icon,
+  label,
+}: {
+  to: string;
+  icon: typeof Users;
+  label: string;
+}) {
+  return (
+    <Link
+      to={to}
+      className="group flex flex-col items-center gap-2 rounded-2xl p-3 text-center transition-colors hover:bg-primary/5"
+    >
+      <span className="grid size-14 place-items-center rounded-full border-2 border-primary/25 text-primary transition-colors group-hover:border-primary group-hover:bg-primary/10">
+        <Icon className="size-6" />
+      </span>
+      <span className="text-xs font-medium text-muted-foreground">{label}</span>
+    </Link>
   );
 }
 
