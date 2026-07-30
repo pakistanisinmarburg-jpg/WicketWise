@@ -4,6 +4,7 @@ import {
   Bell,
   CircleDot,
   ClipboardCheck,
+  Film,
   Gauge,
   Home,
   Medal,
@@ -28,6 +29,7 @@ export const PUBLIC_NAV: NavItem[] = [
   { to: "/tournaments", label: "Cups", icon: Medal },
   { to: "/rankings", label: "Rankings", icon: BarChart3 },
   { to: "/records", label: "Records", icon: Award },
+  { to: "/highlights", label: "Highlights", icon: Film },
 ];
 export const PLAYER_NAV: NavItem[] = [
   { to: "/dashboard", label: "Dashboard", icon: Gauge },

@@ -4,6 +4,7 @@ import {
   ArrowRight,
   BarChart3,
   CircleDot,
+  Film,
   Radio,
   Trophy,
   UserPlus,
@@ -89,12 +90,13 @@ function Dashboard() {
         </motion.div>
       </section>
 
-      <section className="grid grid-cols-3 gap-4 sm:grid-cols-5">
+      <section className="grid grid-cols-3 gap-4 sm:grid-cols-6">
         <QuickLink to="/live" icon={Radio} label="Live scoring" />
         <QuickLink to="/teams" icon={Users} label="Teams" />
         <QuickLink to="/tournaments" icon={Trophy} label="Tournaments" />
         <QuickLink to="/rankings" icon={BarChart3} label="Rankings" />
         <QuickLink to="/players" icon={UserPlus} label="Players" />
+        <QuickLink to="/highlights" icon={Film} label="Highlights" />
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

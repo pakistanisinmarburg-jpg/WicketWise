@@ -14,6 +14,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LiveRouteImport } from './routes/live'
+import { Route as HighlightsRouteImport } from './routes/highlights'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ProfileRouteImport } from './routes/profile'
@@ -56,6 +57,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const LiveRoute = LiveRouteImport.update({
   id: '/live',
   path: '/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightsRoute = HighlightsRouteImport.update({
+  id: '/highlights',
+  path: '/highlights',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotificationsRoute = NotificationsRouteImport.update({
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/live': typeof LiveRoute
+  '/highlights': typeof HighlightsRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/live': typeof LiveRoute
+  '/highlights': typeof HighlightsRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
@@ -206,6 +214,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/live': typeof LiveRoute
+  '/highlights': typeof HighlightsRoute
   '/notifications': typeof NotificationsRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
@@ -233,6 +242,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/live'
+    | '/highlights'
     | '/notifications'
     | '/onboarding'
     | '/profile'
@@ -258,6 +268,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/live'
+    | '/highlights'
     | '/notifications'
     | '/onboarding'
     | '/profile'
@@ -283,6 +294,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/live'
+    | '/highlights'
     | '/notifications'
     | '/onboarding'
     | '/profile'
@@ -309,6 +321,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   LiveRoute: typeof LiveRoute
+  HighlightsRoute: typeof HighlightsRoute
   NotificationsRoute: typeof NotificationsRoute
   OnboardingRoute: typeof OnboardingRoute
   ProfileRoute: typeof ProfileRoute
@@ -364,6 +377,13 @@ declare module '@tanstack/react-router' {
       path: '/live'
       fullPath: '/live'
       preLoaderRoute: typeof LiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlights': {
+      id: '/highlights'
+      path: '/highlights'
+      fullPath: '/highlights'
+      preLoaderRoute: typeof HighlightsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notifications': {
@@ -501,6 +521,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   LiveRoute: LiveRoute,
+  HighlightsRoute: HighlightsRoute,
   NotificationsRoute: NotificationsRoute,
   OnboardingRoute: OnboardingRoute,
   ProfileRoute: ProfileRoute,
