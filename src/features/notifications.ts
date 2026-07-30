@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useId } from "react";
 
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import type { Notification, UUID } from "@/lib/types";
@@ -24,13 +24,23 @@ export const useNotifications = (userId: UUID | undefined) =>
       ),
   });
 
-/** Keeps the bell live without polling. */
+/**
+ * Keeps the bell live without polling.
+ *
+ * This hook mounts in more than one place at once (the header bell AND the
+ * full /notifications page), so the channel name must be unique per
+ * component instance -- Supabase's realtime client throws if you try to
+ * `.subscribe()` a second channel with the same topic that's already
+ * subscribed ("cannot add `postgres_changes` callbacks ... after
+ * `subscribe()`"). A React-generated id keeps each mount's channel distinct.
+ */
 export function useNotificationsRealtime(userId: UUID | undefined) {
   const qc = useQueryClient();
+  const instanceId = useId();
   useEffect(() => {
     if (!isSupabaseConfigured || !userId) return;
     const channel = supabase
-      .channel(`notifications:${userId}`)
+      .channel(`notifications:${userId}:${instanceId}`)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "notifications", filter: `user_id=eq.${userId}` },
@@ -40,7 +50,7 @@ export function useNotificationsRealtime(userId: UUID | undefined) {
     return () => {
       void supabase.removeChannel(channel);
     };
-  }, [userId, qc]);
+  }, [userId, qc, instanceId]);
 }
 
 export function useMarkNotificationRead() {
