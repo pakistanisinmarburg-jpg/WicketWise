@@ -4,6 +4,7 @@ import { Film, Play } from "lucide-react";
 import { useState } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { TEAM_COLORS, type TeamName } from "@/lib/team-colors";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/highlights")({
@@ -26,15 +27,6 @@ export const Route = createFileRoute("/highlights")({
   }),
   component: HighlightsPage,
 });
-
-type TeamName = "Pakistan" | "India" | "Australia" | "England";
-
-const TEAM_COLORS: Record<TeamName, string> = {
-  Pakistan: "#0f6b34",
-  India: "#1e4fa3",
-  Australia: "#caa100",
-  England: "#0b2f5c",
-};
 
 type Clip = {
   id: string;

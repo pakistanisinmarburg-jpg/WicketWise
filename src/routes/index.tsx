@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 
+import { LegendsCarousel } from "@/components/legends-carousel";
 import { LiveDot, StatCounter } from "@/components/stat-counter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -98,6 +99,8 @@ function Dashboard() {
         <QuickLink to="/players" icon={UserPlus} label="Players" />
         <QuickLink to="/highlights" icon={Film} label="Highlights" />
       </section>
+
+      <LegendsCarousel />
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatTile
